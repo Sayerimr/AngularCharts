@@ -9,5 +9,5 @@ import {MatMenuModule} from '@angular/material/menu';
 })
 export class MenuComponent {
   @Input() continentsMenu: string[] = [];
-  menu : any[] = [];
+ 
 }

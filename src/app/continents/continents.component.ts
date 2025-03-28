@@ -14,14 +14,13 @@ import { MenuComponent } from "../menu/menu.component";
 
 export class ContinentsComponent {
   continentsData: any[] = [];
-  arrayContinent: any[] = [];
-  uniqueContinents: Set<string> = new Set();
   continents: any[] = [];
+  population: any[] = [];
 
   populationChart: number[] = [];
   continentChart: string[] = [];
   constructor() { }
-
+  
 
   ngOnInit(): void {
     //Get the data from the API
@@ -49,13 +48,17 @@ export class ContinentsComponent {
         });
         const continentName = Object.keys(continentPopulationMap);
         const continentData = Object.values(continentPopulationMap);
-  
-        //console.log('ContinentName:', continentName);
-        //console.log('Continent data:', continentData);
+        continentName.forEach(element => {    
+          this.continents.push(element);
+        });
+        continentData.forEach(element => {    
+          this.population.push(element);
+        });
+        
+        //this.continentChart = this.continents;
+        //this.populationChart = this.population;
 
-        this.populationChart = continentData;
-        this.continentChart = continentName;
-
+       console.log('Continent data:', this.continents);
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

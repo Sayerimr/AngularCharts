@@ -1,45 +1,46 @@
-import { Component, Input } from '@angular/core';
-import { Chart } from 'chart.js/auto';
+import { Component, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartOptions, ChartData } from 'chart.js';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrl: './chart.component.css'
+  styleUrl: './chart.component.css',
+  imports: [BaseChartDirective,CommonModule]
 })
 export class ChartComponent {
   @Input() population : number[] = [];
   @Input() continents: string[] = [];
 
-  chart: any = [];
-  constructor() { }
+  dataContinent : string[] = [];
+  dataPopulation : number[] = [];
+  isBrowser: boolean;
 
-  ngOnInit(): void {
-    console.log("conti"+ this.continents);
-    this.continents.forEach(element => {
-      console.log("data"+ element);
-    });
-  
-
-    // Initialize the chart 
-    this.chart = new Chart('canvas', {
-      type: 'bar',
-      data: {
-        labels: this.continents,
-        datasets: [
-          {
-            label: 'Population',
-            data: this.population,
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
+  public charOptions: ChartOptions = {
+    responsive: true,
   }
-}
+
+  public charData: ChartData<'bar'> = {
+   labels: this.continents,
+   datasets:[
+    {
+      data: this.population,
+      label: 'Population',
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+    }
+   ]
+  }
+
+ public charType: 'bar' = 'bar';
+
+
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  }
+
