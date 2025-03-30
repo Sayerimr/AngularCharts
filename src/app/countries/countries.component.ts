@@ -11,14 +11,15 @@ import { ChartComponent } from "../chart/chart.component";
 })
 export class CountriesComponent implements OnInit{
   @Input() continentSelected: string = "";
-
   @Input() childData: any; refreshChildData() {
     this.childData.value = this.continentSelected;
   }
+
+
+
   countriesData: any[] = [];
   countryNames: string[] = [];
   countryPopulation: number[] = [];
-
 
   ngOnInit(): void {
 
@@ -35,9 +36,6 @@ export class CountriesComponent implements OnInit{
               this.countryPopulation.push(country.population);
           }
         });
-
-        console.log("Countries Name-> " +  this.countryNames)
-        console.log("Countries Pop-> " +  this.countryPopulation)
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

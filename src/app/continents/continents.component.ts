@@ -14,10 +14,14 @@ import { ChartComponent } from "../chart/chart.component";
 export class ContinentsComponent {
   @Output() continentEmmiter: EventEmitter<string[]> = new EventEmitter<string[]>();
 
+  @Input() filterPopulation: number = 0;
+  @Input() filterData: any; refreshFilterData() {
+    this.filterData.value = this.filterPopulation;
+  }
+
   continentsData: any[] = [];
   continentNames: string[] = [];
   populationSums: number[] = [];
-
   constructor() { }
 
 
@@ -42,12 +46,9 @@ export class ContinentsComponent {
             }
           });
         });
-
         // Emit the continent names to the parent component (menu)
         this.continentEmmiter.emit(this.continentNames);
-
-        console.log('Continent Names:', this.continentNames);
-        //console.log('Population Data:', this.populationSums);
+        console.log("Filtro Continetes " + this.filterPopulation);
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

@@ -19,26 +19,6 @@ export class ChartComponent  implements OnInit{
   @Input() continents: string[] = [];
 
   isBrowser: boolean;
-
-  // public charType: 'bar' = 'bar';
-
-  // public charOptions: ChartOptions = {
-  //   responsive: true,
-  // }
-
-  // public charData: ChartData<'bar'> = {
-  //   labels: ['1','2','3'],
-  //   datasets: [
-  //     {
-  //       data:[1,2,3],
-  //       label: 'Population',
-  //       backgroundColor: 'rgba(255, 99, 132, 0.2)',
-  //       borderColor: 'rgba(255, 99, 132, 1)',
-  //       borderWidth: 1
-  //     }
-  //   ]
-  // }
-
   public chart: Chart | undefined;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
@@ -79,7 +59,7 @@ export class ChartComponent  implements OnInit{
       data // datos 
     })
       // And any other code that should run only after 5s
-    }, 5000);
+    }, 300);
     // datos
 
     

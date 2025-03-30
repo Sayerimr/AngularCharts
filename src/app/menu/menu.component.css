@@ -1,6 +1,35 @@
+.menu-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.slider-section{
+    display: flex;
+    flex-wrap: wrap;
+    height: min-content;
+    justify-content: center;
+}
+
+.text{
+    width: 100%;
+    text-align: center;
+color: black;
+font-weight : 400;
+padding: 16px 16px 0 24px;
+font-family:Arial, Helvetica, sans-serif;
+font-size: 14px;
+}
 .mat-mdc-button:not(:disabled) {
     color: #000000;
     background-color: #93c9ee;
     border-radius: 5px;
     margin-top: 25px;
 }
+
+
+.mat-slider {
+    width: 650px;
+    color: blue;
+  }
+

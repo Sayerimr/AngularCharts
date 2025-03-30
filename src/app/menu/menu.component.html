@@ -1,26 +1,42 @@
-<button mat-button [matMenuTriggerFor]="menu">
-  <span>Select a continent</span>
-  <mat-icon>more_vert</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <button mat-menu-item (click)="onClick('Worldwide')">"Worldwide"
-    </button>
-    @for (continent of continentNames; track continent) {
-    <button mat-menu-item (click)="onClick(continent)">
-      {{ continent }}
-    </button>
-    }
+<div class="menu-section">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <span>Select a continent</span>
+    <mat-icon>more_vert</mat-icon>
   </button>
-</mat-menu>
 
-<div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <button mat-menu-item (click)="onClick('Worldwide')">"Worldwide"
+      </button>
+      @for (continent of continentNames; track continent) {
+      <button mat-menu-item (click)="onClick(continent)">
+        {{ continent }}
+      </button>
+      }
+    </button>
+  </mat-menu>
+  <div class="slider-section">
+    <mat-form-field class="example-form-field">
+      <mat-label>Max population value</mat-label>
+      <input matInput #filter type="text" [(ngModel)]="value">
+      @if (value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=0">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-flat-button (click)="onFilter(value)">Filter</button>
+    </div>
+  </div>
+
+</div>
+<div class="chart-section">
   @if (continentOption == 'Worldwide' || continentOption == '') {
-  <app-continents (continentEmmiter)="getContinetName($event)"></app-continents>
+  <app-continents (continentEmmiter)="getContinetName($event)" (filterPopulation)="getFilterData($event)"></app-continents>
   } @else if (continentOption != 'Worldwide' && rendered){
   <app-countries [continentSelected]="continentOption"></app-countries>
   }@else if (continentOption != 'Worldwide' && rendered == false){
-    <app-countries [continentSelected]="continentOption"></app-countries>
+  <app-countries [continentSelected]="continentOption"></app-countries>
   }
 </div>
