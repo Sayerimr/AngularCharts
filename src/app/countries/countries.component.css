@@ -1,0 +1,9 @@
+.box{
+    width: 73em;
+    height: 38em;
+    background-color: #f0f0f0;
+    border: ridge  5px  #93c9ee;
+    border-radius: 15px;
+    display: flex;
+    justify-self: center;
+}

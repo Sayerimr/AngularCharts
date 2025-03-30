@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ContinentsComponent } from "./continents/continents.component";
+import { MenuComponent } from "./menu/menu.component";
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule,ContinentsComponent],
+  imports: [CommonModule, MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

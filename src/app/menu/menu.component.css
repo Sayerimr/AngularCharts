@@ -1,0 +1,6 @@
+.mat-mdc-button:not(:disabled) {
+    color: #000000;
+    background-color: #93c9ee;
+    border-radius: 5px;
+    margin-top: 25px;
+}

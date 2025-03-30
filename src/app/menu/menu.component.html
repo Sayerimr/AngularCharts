@@ -1,8 +1,26 @@
+<button mat-button [matMenuTriggerFor]="menu">
+  <span>Select a continent</span>
+  <mat-icon>more_vert</mat-icon>
+</button>
 
-<mat-menu >
+<mat-menu #menu="matMenu">
   <button mat-menu-item>
-    @for (item of continentsMenu; track item) {
-        <li>{{ item }}</li>
+    <button mat-menu-item (click)="onClick('Worldwide')">"Worldwide"
+    </button>
+    @for (continent of continentNames; track continent) {
+    <button mat-menu-item (click)="onClick(continent)">
+      {{ continent }}
+    </button>
     }
-    </button> 
+  </button>
 </mat-menu>
+
+<div>
+  @if (continentOption == 'Worldwide' || continentOption == '') {
+  <app-continents (continentEmmiter)="getContinetName($event)"></app-continents>
+  } @else if (continentOption != 'Worldwide' && rendered){
+  <app-countries [continentSelected]="continentOption"></app-countries>
+  }@else if (continentOption != 'Worldwide' && rendered == false){
+    <app-countries [continentSelected]="continentOption"></app-countries>
+  }
+</div>

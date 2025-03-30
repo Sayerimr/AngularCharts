@@ -16,3 +16,9 @@
   margin: 0;
   background-color: #f0f0f0;
 }
+
+.space-around{
+  display: flex
+  ;
+      justify-content: space-around;
+}
