@@ -12,13 +12,12 @@ import { ChartComponent } from "../chart/chart.component";
 })
 
 export class ContinentsComponent {
-  @Output() continentEmmiter: EventEmitter<string[]> = new EventEmitter<string[]>(); 
+  @Output() continentEmmiter: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   continentsData: any[] = [];
-  continents: any[] = [];
+  continentNames: string[] = [];
+  populationSums: number[] = [];
 
-  populationChart: number[] = [];
-  continentChart: string[] = [];
   constructor() { }
 
 
@@ -29,34 +28,26 @@ export class ContinentsComponent {
       .get(apiUrl)
       .then((response) => {
         this.continentsData = response.data;
-
-        const continentNames: string[] = [];
-        const populationSums: number[] = [];
-
-        // Iterate over the data to populate the arrays
+        // Iterate over the data 
         this.continentsData.forEach(element => {
-          if (element.population && element.continents) {
-            element.continents.forEach((continent: string) => {
-              if (!continentNames.includes(continent)) {
-                continentNames.push(continent);
-                populationSums.push(element.population);
-              } else {
-                const index = continentNames.indexOf(continent);
-                populationSums[index] += element.population;
-              }
-            });
-          }
+          element.continents.forEach((continent: string) => {
+            //If continent doesnt exist en the array, push it with the population data
+            if (!this.continentNames.includes(continent)) {
+              this.continentNames.push(continent);
+              this.populationSums.push(element.population);
+              //If the continent already exsit find the array position and sum the population data
+            } else {
+              const index = this.continentNames.indexOf(continent);
+              this.populationSums[index] += element.population;
+            }
+          });
         });
 
-        // Flatten the arrays to ensure they are not grouped
-        this.continentChart = continentNames.flat();
-        this.populationChart = populationSums.flat();
+        // Emit the continent names to the parent component (menu)
+        this.continentEmmiter.emit(this.continentNames);
 
-         // Emit the continent names to the parent component
-        this.continentEmmiter.emit(this.continentChart);
-        
-        //console.log('Continent Names:', typeof this.continentChart);
-       // console.log('Population Data:', ...this.populationChart);
+        console.log('Continent Names:', this.continentNames);
+        //console.log('Population Data:', this.populationSums);
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

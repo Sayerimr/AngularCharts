@@ -1,10 +1,11 @@
 
-<div class="graph-container">
+<!-- <div class="graph-container">
     <canvas *ngIf="isBrowser" baseChart 
       [data]="charData" 
       [options]="charOptions" 
       [type]="charType">
     </canvas>
-    <p>{{population}}</p>
-    <p>{{continents}}</p>
-  </div>
+    <span>{{continents}}</span>
+  </div> -->
+
+  <canvas id="chart">{{ chart }}</canvas>
