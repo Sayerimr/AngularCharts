@@ -1,3 +1,4 @@
+<!--Navigation Menu to filter continents  -->
 <div class="menu-section">
   <button mat-button [matMenuTriggerFor]="menu">
     <span>Select a continent</span>
@@ -14,7 +15,8 @@
       </button>
       }
     </button>
-  </mat-menu>
+  </mat-menu>.
+  <!--Population filter  -->
   <div class="slider-section">
     <mat-form-field class="example-form-field">
       <mat-label>Max population value</mat-label>
@@ -31,6 +33,7 @@
   </div>
 
 </div>
+<!-- Loading graphics -->
 <div class="chart-section">
   <!-- If we are at the main page (woldwide) -->
   @if (continentOption == 'Worldwide' || continentOption == '' ) {

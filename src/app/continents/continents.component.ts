@@ -18,8 +18,9 @@ export class ContinentsComponent {
   continentsData: any[] = [];
   continentNames: string[] = [];
   populationSums: number[] = [];
-  filterData :any[] = [];
-  dataFormat:any[] = [];
+  menuContinents : string[] = [];
+  filterData: any[] = [];
+  dataFormat: any[] = [];
   constructor() { }
 
 
@@ -33,41 +34,41 @@ export class ContinentsComponent {
         // Iterate over the data 
         this.continentsData.forEach(element => {
           element.continents.forEach((continent: string) => {
-            //If continent doesnt exist en the array, push it with the population data
+            //If the continent doesnt exist en the array, push it with the population data
             if (!this.continentNames.includes(continent)) {
               this.continentNames.push(continent);
               this.populationSums.push(element.population);
-              
-              //If the continent already exsit find the array position and sum the population data
-              
+
+              //If the continent already exist find the array position and sum the population data of the continent             
             } else {
               const index = this.continentNames.indexOf(continent);
               this.populationSums[index] += element.population;
             }
-
+            //Saving the names of all the continents in a variable so I will never change with the filters
+            this.menuContinents =this.continentNames;
           });
         });
-  
-      // Filtrar los valores menores que filterPopulation
-      if (this.filterPopulation != 4747386228) {
-        const filteredPopulationSums: number[] = [];
-        const filteredContinentNames: string[] = [];
 
-        this.populationSums.forEach((population, index) => {
-          if (population <= this.filterPopulation) {
-            filteredPopulationSums.push(population);
-            filteredContinentNames.push(this.continentNames[index]);
-          }
-        });
+        // If theres a population filter, filter data
+        if (this.filterPopulation != 4747386228) {
+          const filteredPopulationSums: number[] = [];
+          const filteredContinentNames: string[] = [];
 
-        // Actualizar los arrays con los valores filtrados
-        this.populationSums = filteredPopulationSums;
-        this.continentNames = filteredContinentNames;
-      }
+          this.populationSums.forEach((population, index) => {
+            //If the filter number is smaller than the population data, add to the array
+            if (population <= this.filterPopulation) {
+              filteredPopulationSums.push(population);
+              //Add only the contries with the filterd population (same position index)
+              filteredContinentNames.push(this.continentNames[index]);
+            }
+          });
+
+          //Upgrade data
+          this.populationSums = filteredPopulationSums;
+          this.continentNames = filteredContinentNames;
+        }
         // Emit the continent names to the parent component (menu)
-        this.continentEmmiter.emit(this.continentNames);
-
-       
+        this.continentEmmiter.emit(this.menuContinents);
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

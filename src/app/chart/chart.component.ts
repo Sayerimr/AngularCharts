@@ -1,11 +1,6 @@
-import { Component, Input, Inject, PLATFORM_ID, input, OnInit } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartOptions, ChartData } from 'chart.js';
+import { Component, Input, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-
-
 import Chart, { ChartType } from 'chart.js/auto';
-import { subscribe } from 'diagnostics_channel';
 
 @Component({
   standalone: true,
@@ -14,19 +9,23 @@ import { subscribe } from 'diagnostics_channel';
   styleUrl: './chart.component.css',
   imports: [CommonModule]
 })
-export class ChartComponent  implements OnInit{
+export class ChartComponent implements OnInit {
+  //Getting the data from continents and countries
   @Input() population: number[] = [];
   @Input() continents: string[] = [];
 
   isBrowser: boolean;
   public chart: Chart | undefined;
 
+  //Solving a browser visualization problem
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
+    //Setting some time from data to charge
     setTimeout(() => {
+      //Setting chart details and data
       const data = {
         labels: this.continents,
         datasets: [{
@@ -53,18 +52,12 @@ export class ChartComponent  implements OnInit{
           borderWidth: 1
         }]
       };
-          // Creamos la gráfica
-    this.chart = new Chart("chart", {
-      type: 'bar' as ChartType, // tipo de la gráfica 
-      data // datos 
-    })
-      // And any other code that should run only after 5s
+      // Creating the chart
+      this.chart = new Chart("chart", {
+        type: 'bar' as ChartType, 
+        data  
+      })
     }, 300);
-    // datos
-
-    
-
-
   }
 }
 
