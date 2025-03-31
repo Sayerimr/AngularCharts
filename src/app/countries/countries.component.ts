@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { countriesAll, environment } from '../environments/environment.development';
+import { countriesAll } from '../environments/environment.development';
 import { ChartComponent } from "../chart/chart.component";
 import axios from 'axios';
 
