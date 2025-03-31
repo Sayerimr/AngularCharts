@@ -12,7 +12,7 @@ import { subscribe } from 'diagnostics_channel';
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrl: './chart.component.css',
-  imports: [BaseChartDirective, CommonModule]
+  imports: [CommonModule]
 })
 export class ChartComponent  implements OnInit{
   @Input() population: number[] = [];

@@ -19,6 +19,7 @@ export class ContinentsComponent {
   continentNames: string[] = [];
   populationSums: number[] = [];
   filterData :any[] = [];
+  dataFormat:any[] = [];
   constructor() { }
 
 
@@ -36,25 +37,36 @@ export class ContinentsComponent {
             if (!this.continentNames.includes(continent)) {
               this.continentNames.push(continent);
               this.populationSums.push(element.population);
+              
               //If the continent already exsit find the array position and sum the population data
+              
             } else {
               const index = this.continentNames.indexOf(continent);
               this.populationSums[index] += element.population;
             }
+
           });
         });
-        if(this.filterPopulation != 4747386228){
-          //filtering data
-          this.populationSums.forEach(people => {
-            if(this.filterPopulation <= people)
-              //this.filterData = this.populationSums.filter(num => num <= this.filterPopulation);
-            console.log("peolple -> "+ this.filterData );
-          });
-        }
+  
+      // Filtrar los valores menores que filterPopulation
+      if (this.filterPopulation != 4747386228) {
+        const filteredPopulationSums: number[] = [];
+        const filteredContinentNames: string[] = [];
+
+        this.populationSums.forEach((population, index) => {
+          if (population <= this.filterPopulation) {
+            filteredPopulationSums.push(population);
+            filteredContinentNames.push(this.continentNames[index]);
+          }
+        });
+
+        // Actualizar los arrays con los valores filtrados
+        this.populationSums = filteredPopulationSums;
+        this.continentNames = filteredContinentNames;
+      }
         // Emit the continent names to the parent component (menu)
         this.continentEmmiter.emit(this.continentNames);
-        
-        console.log("Filtro Continetes " + this.filterPopulation);
+
        
       })
       .catch((error) => {

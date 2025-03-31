@@ -26,13 +26,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class MenuComponent {
   @Output() dataChanged = new EventEmitter<any>(); 
-  
+
   continentNames: string[] = [];
   continentOption: string = "";
   rendered: boolean = false;
-  filterData : number = 0;
+  filterData : number = 4747386228;
   filterEvent : number = 0;
   value = 4747386228;
+  filteredNumber :number = 0;
+  hasChanged : boolean = false;
 
   getContinetName(e: any){
     this.continentNames = e;
@@ -42,13 +44,22 @@ export class MenuComponent {
     this.continentOption = option;
     this.rendered = !this.rendered;
     this.dataChanged.emit( this.continentOption); 
-
+    console.log("rendered->" + this.rendered);
+    console.log("filterData->" + this.filterData);
+    console.log("hasChanged->" + this.hasChanged);   
   }
 
   onFilter(data : number){
-    this.filterData = data;
-    console.log("FILTRANDO" + this.filterData)
+    this.hasChanged = false
+    this.filterData = data;   
 
+    if(this.filteredNumber != this.filterData){
+      this.hasChanged = true;
+      this.filteredNumber = this.filterData;
+    } 
+    console.log("rendered->" + this.rendered);
+    console.log("filterData->" + this.filterData);
+    console.log("hasChanged->" + this.hasChanged);   
   }
 
 

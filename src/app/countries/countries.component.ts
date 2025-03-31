@@ -14,8 +14,7 @@ export class CountriesComponent implements OnInit{
   @Input() childData: any; refreshChildData() {
     this.childData.value = this.continentSelected;
   }
-
-
+  @Input() filterPopulation: number = 4747386228;
 
   countriesData: any[] = [];
   countryNames: string[] = [];
@@ -36,6 +35,26 @@ export class CountriesComponent implements OnInit{
               this.countryPopulation.push(country.population);
           }
         });
+              // Filtrar los valores menores que filterPopulation
+      if (this.filterPopulation != 4747386228) {
+        const filteredPopulationSums: number[] = [];
+        const filteredCoutriesNames: string[] = [];
+
+        this.countryPopulation.forEach((population, index) => {
+          if (population <= this.filterPopulation) {
+            filteredPopulationSums.push(population);
+            filteredCoutriesNames.push(this.countryNames[index]);
+          }
+        });
+
+        // Actualizar los arrays con los valores filtrados
+        this.countryPopulation = filteredPopulationSums;
+        this.countryNames = filteredCoutriesNames;
+
+        console.log('filtro->'+ this.filterPopulation);
+        console.log('countryPopulation->'+ this.countryPopulation);
+        console.log('countryNames->'+ this.countryNames);
+      }
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);
