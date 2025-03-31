@@ -13,15 +13,12 @@ import { ChartComponent } from "../chart/chart.component";
 
 export class ContinentsComponent {
   @Output() continentEmmiter: EventEmitter<string[]> = new EventEmitter<string[]>();
-
-  @Input() filterPopulation: number = 0;
-  @Input() filterData: any; refreshFilterData() {
-    this.filterData.value = this.filterPopulation;
-  }
+  @Input() filterPopulation: number = 4747386228;
 
   continentsData: any[] = [];
   continentNames: string[] = [];
   populationSums: number[] = [];
+  filterData :any[] = [];
   constructor() { }
 
 
@@ -46,9 +43,19 @@ export class ContinentsComponent {
             }
           });
         });
+        if(this.filterPopulation != 4747386228){
+          //filtering data
+          this.populationSums.forEach(people => {
+            if(this.filterPopulation <= people)
+              //this.filterData = this.populationSums.filter(num => num <= this.filterPopulation);
+            console.log("peolple -> "+ this.filterData );
+          });
+        }
         // Emit the continent names to the parent component (menu)
         this.continentEmmiter.emit(this.continentNames);
+        
         console.log("Filtro Continetes " + this.filterPopulation);
+       
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

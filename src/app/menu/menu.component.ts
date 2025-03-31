@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import {MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 import { ContinentsComponent } from "../continents/continents.component";
 import { MatButtonModule } from '@angular/material/button';
@@ -26,12 +26,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class MenuComponent {
   @Output() dataChanged = new EventEmitter<any>(); 
+  
   continentNames: string[] = [];
   continentOption: string = "";
   rendered: boolean = false;
   filterData : number = 0;
   filterEvent : number = 0;
-  //mat-form
   value = 4747386228;
 
   getContinetName(e: any){
@@ -47,14 +47,7 @@ export class MenuComponent {
 
   onFilter(data : number){
     this.filterData = data;
-    this.dataChanged.emit( this.filterData); 
     console.log("FILTRANDO" + this.filterData)
-
-  }
-
-  getFilterData(e: any){
-    this.filterEvent = e;
-    console.log("E" + this.filterEvent)
 
   }
 

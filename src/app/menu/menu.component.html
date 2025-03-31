@@ -20,7 +20,7 @@
       <mat-label>Max population value</mat-label>
       <input matInput #filter type="text" [(ngModel)]="value">
       @if (value) {
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=0">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=4747386228">
           <mat-icon>close</mat-icon>
         </button>
       }
@@ -32,8 +32,10 @@
 
 </div>
 <div class="chart-section">
-  @if (continentOption == 'Worldwide' || continentOption == '') {
-  <app-continents (continentEmmiter)="getContinetName($event)" (filterPopulation)="getFilterData($event)"></app-continents>
+  @if ((continentOption == 'Worldwide' || continentOption == '') && filterData !== 4747386228) {
+  <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
+   } @else if ((continentOption == 'Worldwide' || continentOption == '') && filterData == 4747386228){
+    <app-continents (continentEmmiter)="getContinetName($event)" ></app-continents>
   } @else if (continentOption != 'Worldwide' && rendered){
   <app-countries [continentSelected]="continentOption"></app-countries>
   }@else if (continentOption != 'Worldwide' && rendered == false){

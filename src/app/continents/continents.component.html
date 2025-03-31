@@ -1,6 +1,11 @@
-<app-chart class="box"
-[continents]="continentNames"
-[population]="populationSums">
-</app-chart>
-
-
+@if (filterPopulation !== 4747386228) {
+    <app-chart class="box"
+    [continents]="continentNames"
+    [population]="filterData">
+    </app-chart>
+}@else {
+    <app-chart class="box"
+    [continents]="continentNames"
+    [population]="populationSums">
+    </app-chart> 
+}
