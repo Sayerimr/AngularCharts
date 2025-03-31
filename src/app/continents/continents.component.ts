@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, output, Output } from '@angular/core';
-import { environment } from '../environments/environment.development';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { continentsAll } from '../environments/environment.development';
 import axios from 'axios';
 import { ChartComponent } from "../chart/chart.component";
-
 
 @Component({
   selector: 'app-continents',
@@ -18,15 +17,13 @@ export class ContinentsComponent {
   continentsData: any[] = [];
   continentNames: string[] = [];
   populationSums: number[] = [];
-  menuContinents : string[] = [];
-  filterData: any[] = [];
-  dataFormat: any[] = [];
+  menuContinents: string[] = [];
   constructor() { }
 
 
   ngOnInit(): void {
     //Get the data from the API
-    const apiUrl = environment.apiUrl;
+    const apiUrl = continentsAll.apiUrl;
     axios
       .get(apiUrl)
       .then((response) => {
@@ -45,7 +42,7 @@ export class ContinentsComponent {
               this.populationSums[index] += element.population;
             }
             //Saving the names of all the continents in a variable so I will never change with the filters
-            this.menuContinents =this.continentNames;
+            this.menuContinents = this.continentNames;
           });
         });
 

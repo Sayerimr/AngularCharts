@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from "./menu/menu.component";
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [CommonModule, MenuComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   
   constructor() {}
-
-  ngOnInit() {
-
-  }
 
 }

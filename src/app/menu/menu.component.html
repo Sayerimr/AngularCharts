@@ -1,75 +1,78 @@
-<!--Navigation Menu to filter continents  -->
-<div class="menu-section">
-  <button mat-button [matMenuTriggerFor]="menu">
-    <span>Select a continent</span>
-    <mat-icon>more_vert</mat-icon>
-  </button>
-
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <button mat-menu-item (click)="onClick('Worldwide')">"Worldwide"
+<div class="container">
+  <div class="main">
+    <div class="menu-section">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span>Select a continent</span>
+        <mat-icon>more_vert</mat-icon>
       </button>
-      @for (continent of continentNames; track continent) {
-      <button mat-menu-item (click)="onClick(continent)">
-        {{ continent }}
-      </button>
-      }
-    </button>
-  </mat-menu>.
-  <!--Population filter  -->
-  <div class="slider-section">
-    <mat-form-field class="example-form-field">
-      <mat-label>Max population value</mat-label>
-      <input matInput #filter type="text" [(ngModel)]="value">
-      @if (value) {
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=4747386228">
-          <mat-icon>close</mat-icon>
+      <div class="title">
+        <h1>Population of the World</h1>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <button mat-menu-item (click)="onClick('Worldwide')" routerLink="continents"
+            routerLinkActive="activebutton">"Worldwide"
+          </button>
+          @for (continent of continentNames; track continent) {
+          <button mat-menu-item (click)="onClick(continent)" routerLink="/countries" routerLinkActive="activebutton">
+            {{ continent }}
+          </button>
+          }
         </button>
+      </mat-menu>
+      <!--Population filter  -->
+      <div class="filter-section">
+        <mat-form-field class="example-form-field">
+          <mat-label>Max population value</mat-label>
+          <input matInput #filter type="text" [(ngModel)]="value">
+          @if (value) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="value=4747386228">
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+        </mat-form-field>
+        <div class="example-button-row">
+          <button mat-flat-button (click)="onFilter(value)">Filter</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- Loading graphics -->
+    <div class="chart-section">
+      <!-- If we are at the main page (woldwide) -->
+      @if (continentOption == 'Worldwide' || continentOption == '' ) {
+        <!-- If filter data has changed and its different from defalult (max)-->
+        @if (filterData != 4747386228 && hasChanged == true) {
+          <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
+        <!-- If filter data has changed to defalult (max)-->
+        }@else if(filterData == 4747386228 && hasChanged == true){
+        <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
+        }@else {
+        <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
+        }
+      <!-- If we are in a new continent component -->
+      }@else if(continentOption != 'Worldwide' && rendered){
+      <!-- If filter data has changed and its different from defalult (max)-->
+        @if(filterData != 4747386228 && hasChanged == true){
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+        <!-- If filter data has changed to defalult (max)-->
+        }@else if(filterData == 4747386228 && hasChanged == true){
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+        }@else {
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+        }
+      <!-- If we are in the same continent component -->
+      }@else if(continentOption != 'Worldwide' && rendered == false) {
+        @if(filterData != 4747386228 && hasChanged == true){
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+          <!-- If filter data has changed to defalult (max)-->
+        }@else if(filterData == 4747386228 && hasChanged == true){
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+        }@else {
+         <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+        }
       }
-    </mat-form-field>
-    <div class="example-button-row">
-      <button mat-flat-button (click)="onFilter(value)">Filter</button>
+
     </div>
   </div>
-
 </div>
-<!-- Loading graphics -->
-<div class="chart-section">
-  <!-- If we are at the main page (woldwide) -->
-  @if (continentOption == 'Worldwide' || continentOption == '' ) {
-     <!-- If filter data has changed and its different from defalult (max)-->
-    @if (filterData != 4747386228 && hasChanged == true) {
-      <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-      <!-- If filter data has changed to defalult (max)-->
-    }@else if(filterData == 4747386228 && hasChanged == true){
-      <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-    }@else {
-      <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-    }
-     <!-- If we are in a new continent component -->
-  }@else if(continentOption != 'Worldwide' && rendered){
-     <!-- If filter data has changed and its different from defalult (max)-->
-    @if(filterData != 4747386228 && hasChanged == true){
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-       <!-- If filter data has changed to defalult (max)-->
-    }@else if(filterData == 4747386228 && hasChanged == true){
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-    }@else {
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-    }
-      <!-- If we are in the same continent component -->
-  }@else if(continentOption != 'Worldwide' && rendered == false) {
-    @if(filterData != 4747386228 && hasChanged == true){
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-       <!-- If filter data has changed to defalult (max)-->
-    }@else if(filterData == 4747386228 && hasChanged == true){
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-    }@else {
-      <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-    }
-  }
-
-</div>
-
-    
-  
