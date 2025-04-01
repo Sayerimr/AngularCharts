@@ -21,7 +21,7 @@ import { CountriesComponent } from "../countries/countries.component";
     MatInputModule,
     FormsModule,
     CountriesComponent,
-    ContinentsComponent,
+    ContinentsComponent,RouterModule
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'

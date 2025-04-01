@@ -6,19 +6,19 @@ import { MenuComponent } from './menu/menu.component';
 
 export const routes: Routes = [
   
-//   {path: '',
-//    component: MenuComponent,
-//    children: [
-//     {
-//       path: 'continents', // child route path
-//       component: ContinentsComponent, // child route component that the router renders
-//     },
-//     {
-//       path: 'countries',
-//       component: CountriesComponent, // another child route component that the router renders
-//     },
-//   ],
-// }
+  {path: '',
+   component: MenuComponent,
+   children: [
+    {
+      path: 'continents', // child route path
+      component: ContinentsComponent, // child route component that the router renders
+    },
+    {
+      path: 'countries',
+      component: CountriesComponent, // another child route component that the router renders
+    },
+  ],
+}
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
