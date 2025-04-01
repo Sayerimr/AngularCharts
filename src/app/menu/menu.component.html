@@ -10,11 +10,10 @@
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <button mat-menu-item (click)="onClick('Worldwide')" routerLink="continents"
-            routerLinkActive="activebutton">"Worldwide"
+          <button mat-menu-item (click)="onClick('Worldwide')" >"Worldwide"
           </button>
           @for (continent of continentNames; track continent) {
-          <button mat-menu-item (click)="onClick(continent)" routerLink="/countries" routerLinkActive="activebutton">
+          <button mat-menu-item (click)="onClick(continent)" >
             {{ continent }}
           </button>
           }
