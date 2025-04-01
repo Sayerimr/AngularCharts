@@ -6,7 +6,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RouterModule, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { ContinentsComponent } from "../continents/continents.component";
 import { CountriesComponent } from "../countries/countries.component";
 
