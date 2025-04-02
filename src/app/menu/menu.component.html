@@ -34,49 +34,26 @@
           <button mat-flat-button (click)="onFilter(value)">Filter</button>
         </div>
       </div>
-
     </div>
    
     <!-- Loading graphics -->
     <div class="chart-section">
       <!-- If we are at the main page (woldwide) -->
       @if (continentOption == 'Worldwide' || continentOption == '') {
-        <!-- If filter data has changed and its different from defalult (max)-->
-        @if (filterData != 4747386228 && hasChanged == true) {
-          <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-        <!-- If filter data has changed to defalult (max)-->
-        }@else if(filterData == 4747386228 && hasChanged == true){
-        <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-        }@else {
-        <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
-        }
+        @if(rendered){
+          <app-continents (continentEmmiter)="getContinentName($event)" [filterPopulation]="this.filterData"></app-continents>
+        }@else{
+          <app-continents (continentEmmiter)="getContinentName($event)" [filterPopulation]="this.filterData"></app-continents>
+        }        
       <!-- If we are in a new continent component -->
-      }@else if(continentOption != 'Worldwide' && rendered){
-        
-      <!-- If filter data has changed and its different from defalult (max)-->
-        @if(filterData != 4747386228 && hasChanged == true){
-          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-        <!-- If filter data has changed to defalult (max)-->
-        }@else if(filterData == 4747386228 && hasChanged == true){
-          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+      }@else if((continentOption != 'Worldwide') ){       
+        @if(rendered){
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData" (continentEmmiter)="getContinentName($event)"></app-countries>
         }@else {
-          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-        }
-      <!-- If we are in the same continent component -->
-      }@else if(continentOption != 'Worldwide' && rendered == false) {
-        @if(filterData != 4747386228 && hasChanged == true){
-          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-          <!-- If filter data has changed to defalult (max)-->
-        }@else if(filterData == 4747386228 && hasChanged == true){
-          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
-        }@else {
-         <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
+          <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData" (continentEmmiter)="getContinentName($event)"></app-countries>
         }
       }
-
     </div>
   </div>
 </div>
-
-<router-outlet>
-  </router-outlet>
+<router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { countriesAll } from '../environments/environment.development';
 import { ChartComponent } from "../chart/chart.component";
 import axios from 'axios';
@@ -17,13 +17,16 @@ export class CountriesComponent implements OnInit {
   }
   // Getting the population filtered
   @Input() filterPopulation: number = 4747386228;
+  
+  //Sending continents to parent menu
+  @Output() continentEmmiter: EventEmitter<string[]> = new EventEmitter<string[]>();
 
+  continentNames: string[] = [];
   countriesData: any[] = [];
   countryNames: string[] = [];
   countryPopulation: number[] = [];
-  countryUrl: string = '';
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     //Get the data from the API
     const apiUrl = countriesAll.apiUrl;
     axios
@@ -37,7 +40,14 @@ export class CountriesComponent implements OnInit {
             this.countryNames.push(country.name.common);
             this.countryPopulation.push(country.population);
           }
+          //Get the continents values for the menu
+          country.continents.forEach((continent: string) => {
+            if (!this.continentNames.includes(continent)) {
+              this.continentNames.push(continent);
+            }
+          });
         });
+
         // If theres a population filter, filter data
         if (this.filterPopulation != 4747386228) {
           const filteredPopulationSums: number[] = [];
@@ -56,6 +66,7 @@ export class CountriesComponent implements OnInit {
           this.countryPopulation = filteredPopulationSums;
           this.countryNames = filteredCoutriesNames;
         }
+        this.continentEmmiter.emit(this.continentNames);
       })
       .catch((error) => {
         console.error('Error fetching countries:', error);

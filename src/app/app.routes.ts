@@ -1,7 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ContinentsComponent } from './continents/continents.component';
-import { CountriesComponent } from './countries/countries.component';
 import { MenuComponent } from './menu/menu.component';
 
 export const routes: Routes = [  
@@ -18,6 +16,7 @@ export const routes: Routes = [
     path: '**',
     redirectTo: '', // Redirect to the default route
   },
+
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

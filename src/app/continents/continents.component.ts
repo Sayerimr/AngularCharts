@@ -18,7 +18,8 @@ export class ContinentsComponent {
   continentNames: string[] = [];
   populationSums: number[] = [];
   menuContinents: string[] = [];
-  constructor() { }
+  
+  constructor() {}
 
 
   ngOnInit(): void {
