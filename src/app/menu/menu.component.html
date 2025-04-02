@@ -10,10 +10,10 @@
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <button mat-menu-item (click)="onClick('Worldwide')"  routerLink="continents" acti>"Worldwide"
+          <button mat-menu-item (click)="onClick('Worldwide')"  >"Worldwide"
           </button>
           @for (continent of continentNames; track continent) {
-          <button mat-menu-item (click)="onClick(continent)"  routerLink="countries" >
+          <button mat-menu-item (click)="onClick(continent)"  >
             {{ continent }}
           </button>
           }
@@ -36,10 +36,11 @@
       </div>
 
     </div>
+   
     <!-- Loading graphics -->
     <div class="chart-section">
       <!-- If we are at the main page (woldwide) -->
-      @if (continentOption == 'Worldwide' || continentOption == '' ) {
+      @if (continentOption == 'Worldwide' || continentOption == '') {
         <!-- If filter data has changed and its different from defalult (max)-->
         @if (filterData != 4747386228 && hasChanged == true) {
           <app-continents (continentEmmiter)="getContinetName($event)" [filterPopulation]="this.filterData"></app-continents>
@@ -51,6 +52,7 @@
         }
       <!-- If we are in a new continent component -->
       }@else if(continentOption != 'Worldwide' && rendered){
+        
       <!-- If filter data has changed and its different from defalult (max)-->
         @if(filterData != 4747386228 && hasChanged == true){
           <app-countries [continentSelected]="continentOption" [filterPopulation]="this.filterData"></app-countries>
@@ -75,4 +77,6 @@
     </div>
   </div>
 </div>
-<router-outlet>  </router-outlet>
+
+<router-outlet>
+  </router-outlet>

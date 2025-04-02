@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
      provideClientHydration(withEventReplay()),
      provideHttpClient(),
      provideCharts(withDefaultRegisterables()),
-     provideRouter(routes, withComponentInputBinding()),
+     provideRouter(routes, withComponentInputBinding())
     ] 
 };
 

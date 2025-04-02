@@ -21,8 +21,9 @@ export class CountriesComponent implements OnInit {
   countriesData: any[] = [];
   countryNames: string[] = [];
   countryPopulation: number[] = [];
+  countryUrl: string = '';
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     //Get the data from the API
     const apiUrl = countriesAll.apiUrl;
     axios

@@ -22,6 +22,7 @@ export class ContinentsComponent {
 
 
   ngOnInit(): void {
+ 
     //Get the data from the API
     const apiUrl = continentsAll.apiUrl;
     axios

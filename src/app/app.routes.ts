@@ -4,21 +4,20 @@ import { ContinentsComponent } from './continents/continents.component';
 import { CountriesComponent } from './countries/countries.component';
 import { MenuComponent } from './menu/menu.component';
 
-export const routes: Routes = [
-  
-  {path: '',
-   component: MenuComponent,
-   children: [
-    {
-      path: 'continents', // child route path
-      component: ContinentsComponent, // child route component that the router renders
-    },
-    {
-      path: 'countries',
-      component: CountriesComponent, // another child route component that the router renders
-    },
-  ],
-}
+export const routes: Routes = [  
+  {
+    path: '',
+    component: MenuComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'continents/:name',
+    component: MenuComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '', // Redirect to the default route
+  },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

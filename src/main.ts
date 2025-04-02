@@ -2,7 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, appConfig)
@@ -10,6 +10,7 @@ bootstrapApplication(AppComponent, appConfig)
 
   bootstrapApplication(AppComponent, {
     providers: [provideCharts(withDefaultRegisterables()),
-      provideRouter(routes), 
+      provideRouter(routes),
+      provideRouter(routes, withComponentInputBinding()) 
     ],
   }).catch((err) => console.error(err));
